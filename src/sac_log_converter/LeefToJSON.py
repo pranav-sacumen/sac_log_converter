@@ -1,18 +1,24 @@
-import json
-import re
-import yaml
+from asyncio.log import logger
+from sac_log_converter.Getconfig import check_config, parse_configurations
+from sac_log_converter.converter import convert_leef_to_json
+from sac_log.logger import get_logger
 
-def leef_to_json(is_config=True):
-   if is_config==True:
-        with open("/home/dell/sac_log_converter/config/config.yaml", "r") as yamlfile:
-               data = yaml.load(yamlfile, Loader=yaml.FullLoader)
-               print("Read successful")
-        print(data)
-   else:
-       pass 
-   print(data['present'])
-   while is_config==False:
-       with open("config.json", "r") as jsonfile:
-             data = json.load(jsonfile) 
-             print("Read successful")
-             jsonfile.close()
+
+def leef_to_json(is_config=True, config_path=None, config_json=None, events=[]):
+    if is_config==True:
+        if config_path is not None:
+            try:
+                raw_config = check_config(config_path)
+            except ValueError as e:
+                logger.error("Yaml file is not in correct format")
+
+        else:
+            logger.error('Config path is not provided please provide path to yaml configuration.')
+    else:
+        raw_config = check_config(config_json)
+
+    config = parse_configurations(raw_config)
+    json_data = convert_leef_to_json(config, events)
+    return json_data
+
+    
