@@ -14,19 +14,20 @@ def convert_leef_to_json(config, events):
                     result[config["syslog_headers"][index]] = convert_time_to_format(syslog_headers[index])
                 else:
                     result[config["syslog_headers"][index]] = syslog_headers[index]
+                    
             
                 
         if not len(config["leef_headers"]) == len(event[0:-1]):
             raise Exception("Leef headers does not match to events")
         else:
              result[config]["LEEF_headers"][index] = leef_headers[index]
+    print(result)
 
 test = "cat=C2 cs1Label=subcat cs1=DNS_TUNNELING cs2Label=vueUrls cs2=https://aws-dev.sacdev.io/alerts?filter=alertId%3D%3D81650 cs3Label=Tags cs3=USA,Finance cs4Label=Url cs4=https://aws-dev.sacdev.io/settings/tir?rules.sort=4%3A1&filter=state%3D%3D2&selected=9739323 cn1Label=severityScore cn1=900 msg=Malicious activity was reported in CAAS\= A threat intelligence rule has been automatically created in DAAS. dhost=bad.com dst=1.1.1.1"
 
 
 json_event= {}
 test = test.split(" ")
-print(test)
 index=0
 while index < len(test):
     if "=" in test[index]:
@@ -44,8 +45,25 @@ while index < len(test):
         json_event[test[index-1].split("=")[0]] = "=".join(test1.split("=")[1:])
         index += count-2
     index+=1
-print(json_event)
 
 
-    
-
+with open('/home/dell/sac_log_converter/examples/sample_leef_events.txt') as f:
+    lines = f.readlines()
+    c=[]
+    for i in lines:
+        a = i.split(" ")
+    c.append(a[0])
+    c.append(a[1])
+    r=a[2].split("|")
+    r.pop()
+    x = c+r
+    x.append(json_event)
+    test_keys=["EventReceivedTime","Hostname","Version","Vendor","Product","Minor_version","cvss_score","maliciousness","severity","Data"]
+    res1 = {}
+    for key in test_keys:
+        for value in x:
+            res1[key] = value
+            x.remove(value)
+            break
+    print(res1)
+ 
