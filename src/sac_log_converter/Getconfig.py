@@ -1,7 +1,7 @@
 import yaml
 from yaml.loader import SafeLoader
 import sys
-from pyparsing import Word
+from pyparsing import Word,alphas, Suppress, Combine, nums, string, Optional, Regex
 from time import strftime
 
 
@@ -21,7 +21,7 @@ def check_config(config_path):
         return data
 
 
-def parse_configurations(config -> dict):
+
     class Parser(object):
         def __init__(self):
             ints = Word(nums)
