@@ -1,5 +1,6 @@
 from operator import length_hint
 from utils import convert_time_to_format
+import json
 
 
 def convert_leef_to_json(config, events):
@@ -65,5 +66,5 @@ with open('/home/dell/sac_log_converter/examples/sample_leef_events.txt') as f:
             res1[key] = value
             x.remove(value)
             break
-    print(res1)
+    print(json.dumps(res1))
  
