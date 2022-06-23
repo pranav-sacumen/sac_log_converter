@@ -1,13 +1,11 @@
-# Sac Request
+# Sac Log Converter
 
 
-sac_request is a Python wrapper of python requests module which can be
-used to perform the http/https requests.
+Sac Log converter is a re-usable module which is developed to convert any log datas from LEEF format into Json format
+and also Json format into LEEF format .
 
-Supported Authentication methods in Sac request module.
-1. Open urls
-2. Basic Authentication
-3. Token based authentication
+
+By using this module one can easily convert the data from one format to another format in a minimum amount of time.
 
 ## Requirements
 python 3.6
@@ -17,7 +15,7 @@ python 3.6
 *Install from source*
 - Pull the latest code from the source.
 
-    > https://github.com/nitesh-sacumen/sac_requests
+    > https://github.com/pranav-sacumen/sac_log_converter
 
 - Enable a virtual environment
 - Use the below command to install required packages in the virtual environment
@@ -25,82 +23,26 @@ python 3.6
     > pip install -r requirements.txt
 
 ## Usage
-### General HttpRequest Configuration.
 
-python
-from context.config import HttpConfig
-from context.headers import HttpHeaders
-from context.request import HttpRequest
-from context.url import HttpURL
-
-http_config = HttpConfig(
-    time_out=5,
-    retry_interval=1,
-    status_force_list=[429, 500, 502, 503, 504],
-    max_retry=3,
-    auth_type="NO_AUTH",
-)
-http_url = HttpURL(host="www.google.com", protocol="https", port=3306)
-
-headers = HttpHeaders({
-    "content_type" : "application/json"
-})
-http_request = HttpRequest(headers=headers, url=http_url,
-                           config=http_config)
-
-* `HttpConfig()` keep the settings related to request Session like timeout, max-retries etc.
-* `HttpURL()` create the base url which contains the host, port and protocol.
-* `HttpHeaders()` keep the default headers that needs to be used for all request.
-* `HttpRequest()` creates thea request handler to perform the http/https requests.
-
-### Configure Basic Authentication
-To use the basic authentication auth_type need to be set as BASIC_AUTH.
-Also, We need to pass the auth params in the request method.
-python
-from context.config import HttpConfig
-
-http_config = HttpConfig(
-    auth_type="BASIC_AUTH",
-)
-
-* `auth_type="BASIC_AUTH"` Indicates that the request will use the basic authentication. To use the basic authentication we have to pass the auth params in every request.
-
-### Configure Token Bases Authentication
-To use the basic authentication auth_type need to be set as BASIC_AUTH.
-Also, We need to pass the auth params in the request method.
-python
-from context.config import HttpConfig
-
-http_config = HttpConfig(
-    auth_type="BEARER_TOKEN",
-)
-
-* `auth_type="BEARER_TOKEN"` Indicates that the request will use the token based authentication. To use the token authentication we have to pass the auth "Authorization" in request headers.
-
-## Example
-
-### Get request
-It demonstrates the use the sac_request module to fetch the
-public repository of bitbucket.
-
-python
-from constants.general import HTTPS
-from context.config import HttpConfig
-from context.headers import HttpHeaders
-from context.request import HttpRequest
-from context.url import HttpURL
+"""Utility functions to be used by logger module."""
+import os
+from configparser import ConfigParser
+from pathlib import Path
+from typing import Any, Dict, List
 
 
-config = HttpConfig() #Loads Default Configuration
-http_url = HttpURL(
-    host="api.bitbucket.org",
-    protocol=HTTPS,
-)
-headers = HttpHeaders({})
-endpoint = "/2.0/repositories"
-http_request = HttpRequest(headers=headers, url=http_url, config=config)
+def to_dict(config: ConfigParser) -> Dict[str, Any]:
+    """Convert a ConfigParser object into a dictionary.
 
-response = http_request.get(endpoint=endpoint)
+    The resulting dictionary has sections as keys which point to a dict of the
+    sections options as key => value pairs.
+    """
+    config_dict: Dict[str, Any] = {}
+    for section in config.sections():
+        config_dict[section] = {}
+        for key, val in config.items(section):
+            config_dict[section][key] = val
+    return config_dict
 
 
 ## Generate code documentations

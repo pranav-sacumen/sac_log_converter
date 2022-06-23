@@ -1,10 +1,12 @@
-from operator import length_hint
-from utils import convert_time_to_format
+"""Converter code from leef to json."""
 import json
+from operator import length_hint # flake8: noqa
+from utils import convert_time_to_format
 
 
 def convert_leef_to_json(config, events):
-    json_events = [] 
+    """converter function."""
+    json_events = []
     for event in events:
         result = {}
         event = event.split(config["delimeter"])
@@ -15,9 +17,9 @@ def convert_leef_to_json(config, events):
                     result[config["syslog_headers"][index]] = convert_time_to_format(syslog_headers[index])
                 else:
                     result[config["syslog_headers"][index]] = syslog_headers[index]
-                    
-            
-                
+
+
+
         if not len(config["leef_headers"]) == len(event[0:-1]):
             raise Exception("Leef headers does not match to events")
         else:
@@ -25,7 +27,6 @@ def convert_leef_to_json(config, events):
     print(result)
 
 test = "cat=C2 cs1Label=subcat cs1=DNS_TUNNELING cs2Label=vueUrls cs2=https://aws-dev.sacdev.io/alerts?filter=alertId%3D%3D81650 cs3Label=Tags cs3=USA,Finance cs4Label=Url cs4=https://aws-dev.sacdev.io/settings/tir?rules.sort=4%3A1&filter=state%3D%3D2&selected=9739323 cn1Label=severityScore cn1=900 msg=Malicious activity was reported in CAAS\= A threat intelligence rule has been automatically created in DAAS. dhost=bad.com dst=1.1.1.1"
-
 
 json_event= {}
 test = test.split(" ")
@@ -39,7 +40,7 @@ while index < len(test):
         count = 0
         for inner_index in range(index, len(test)):
             count +=1
-            if "\=" in test[inner_index] or "=" not in test[inner_index]:
+            if r"\=" in test[inner_index] or "=" not in test[inner_index]:
                 test1 = test1 + " "+ test[inner_index]
             else:
                 break
@@ -67,4 +68,3 @@ with open('/home/dell/sac_log_converter/examples/sample_leef_events.txt') as f:
             x.remove(value)
             break
     print(json.dumps(res1))
- 

@@ -1,41 +1,39 @@
-logging:
-  environment:
-    dtype: string
-    required: yes
-    default: development
-  log_handler:
-    dtype: string
-    required: yes
-    default: StreamHandler
-  log_level:
-    dtype: string
-    required: yes
-    default: DEBUG
-  log_file_path:
-    dtype: string
-    required: yes
-    default:
-  log_filename:
-    dtype: string
-    required: yes
-    default:
-  log_max_bytes:
-    dtype: int
-    required: no
-    default: 5000000
-  log_backup_count:
-    dtype: int
-    required: no
-    default: 7
-  log_rotation_when:
-    dtype: string
-    required: yes
-    default: midnight
-  log_utc_status:
-    dtype: bool
-    required: yes
-    default: false
-  log_formatter:
-    dtype: string
-    required: yes
-    default:
+type: array
+items:
+  "$ref": "#/definitions/Welcome9Element"
+definitions:
+  Welcome9Element:
+    type: object
+    additionalProperties: false
+    properties:
+      syslog headers:
+        "$ref": "#/definitions/SyslogHeaders"
+      time format:
+        type: string
+      LEEF headers:
+        "$ref": "#/definitions/LEEFHeaders"
+      delimiter:
+        type: string
+    required: []
+    title: Welcome9Element
+  LEEFHeaders:
+    type: object
+    additionalProperties: false
+    properties:
+      fields:
+        type: string
+    required:
+    - fields
+    title: LEEFHeaders
+  SyslogHeaders:
+    type: object
+    additionalProperties: false
+    properties:
+      present:
+        type: integer
+      fields:
+        type: string
+    required:
+    - fields
+    - present
+    title: SyslogHeaders

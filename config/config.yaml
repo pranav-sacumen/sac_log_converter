@@ -3,36 +3,10 @@
     present: 1
     fields: timestamp,hostname
 
- 
+
 - time format: yyyy-MM-ddTHH:mm:ss.SSSZ
-  
+
 - LEEF headers:
     fields: Version,Vendor,Product,Minor_version,cvss_score,maliciousness,severity
 
 - delimiter: '|'
-
-    
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
