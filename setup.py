@@ -9,7 +9,7 @@ setup(
         f"{PACKAGE_NAME}": py_typed,
         f"{PACKAGE_NAME}.converter": py_typed,
         f"{PACKAGE_NAME}.LeefToJSON": py_typed,
-        f"{PACKAGE_NAME}.exceptions": py_typed,
+        f"{PACKAGE_NAME}.Getconfig": py_typed,
         f"{PACKAGE_NAME}.utils": py_typed
     },
     setup_requires=["pytest-runner"]
