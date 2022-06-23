@@ -1,0 +1,39 @@
+type: array
+items:
+  "$ref": "#/definitions/Welcome9Element"
+definitions:
+  Welcome9Element:
+    type: object
+    additionalProperties: false
+    properties:
+      syslog headers:
+        "$ref": "#/definitions/SyslogHeaders"
+      time format:
+        type: string
+      LEEF headers:
+        "$ref": "#/definitions/LEEFHeaders"
+      delimiter:
+        type: string
+    required: []
+    title: Welcome9Element
+  LEEFHeaders:
+    type: object
+    additionalProperties: false
+    properties:
+      fields:
+        type: string
+    required:
+    - fields
+    title: LEEFHeaders
+  SyslogHeaders:
+    type: object
+    additionalProperties: false
+    properties:
+      present:
+        type: integer
+      fields:
+        type: string
+    required:
+    - fields
+    - present
+    title: SyslogHeaders
