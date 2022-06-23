@@ -1,0 +1,16 @@
+{
+    "syslog headers":{
+        "timestamp":"Jan 18 11:07:53",
+        "hostname":"myhostname"
+        },
+    "time-format":{
+        "time-format":"yyyy-MM-ddTHH:mm:ss.SSSZ."
+        },
+    "LEEF headers":{
+        "Version":"1.0",
+        "Vendor":"Microsoft",
+        "Product": "MSExchange",
+        "version":"4.0 SP1",
+        "EventID":"15345"
+        }
+}

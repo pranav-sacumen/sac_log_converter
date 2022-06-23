@@ -1,0 +1,17 @@
+- leef_to json:
+    syslog headers_present: 1
+    sys_log_headers_fields: timestamp,hostname
+    time format: yyyy-MM-ddTHH:mm:ss.SSSZ
+    leef_headers_fields: Version,Vendor,Product,Minor_version,cvss_score,maliciousness,severity
+    delimiter: '|'
+
+- json_to_leef:
+    add_sys_log_header: 1
+    sys_log_header_values: event_time,hostname, leef_version
+    current_time_add: 0
+    time_format: utc
+    leef_headers: vendor, source_name,version, event_id, data
+    leef_headers_mapping: a, b, c, d
+    payload_mapping_fields: src, dst, spt
+    delimeter: |
+
