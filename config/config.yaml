@@ -3,7 +3,7 @@
     syslog_headers_fields: EventReceivedTime,Hostname,LEEF Version
     time_format: yyyy-MM-ddTHH:mm:ss.SSSZ
     leef_headers_fields: Vendor,Product,Minor_version,cvss_score,maliciousness,severity
-    delimiter: '|'
+    delimiter: '\s'
 
 - json_to_leef:
     add_sys_log_header: 1
@@ -13,4 +13,4 @@
     leef_headers: vendor, source_name,version, event_id, data
     leef_headers_mapping: a, b, c, d
     payload_mapping_fields: src, dst, spt
-    delimeter: |
+    delimeter: '|'
