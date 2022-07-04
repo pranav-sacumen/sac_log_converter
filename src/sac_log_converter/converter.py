@@ -2,8 +2,6 @@
 
 from typing import Any, Dict, List
 
-from utils import check_date_time_present
-
 from sac_log_converter.constants.config import (DELIMITER, LEEF_HEADER_FIELDS,
                                                 LEEF_TO_JSON,
                                                 PAYLOAD_DELIMITER,
@@ -12,9 +10,10 @@ from sac_log_converter.constants.config import (DELIMITER, LEEF_HEADER_FIELDS,
 from sac_log_converter.constants.general import (COLON, COMMA, DOUBLE_SLASH,
                                                  EQUAL, PAY_LOAD, SLASH_EQUAL,
                                                  SPACE_CHAR)
+from sac_log_converter.utils import check_date_time_present
 
 
-def convert_leef_to_json(raw_config: dict, events_list: dict) -> list:
+def convert_leef_to_json(raw_config: dict, events_list: list) -> list:
     """Convert the leef format into json."""
     json_events = []
 

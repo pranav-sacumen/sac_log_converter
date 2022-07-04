@@ -6,22 +6,26 @@ import yaml
 
 def check_config_leef_to_json(data: dict) -> dict:
     """Check the configuration."""
-    # Open the file and load the file
-    if not data['syslog_headers_present']:
-        raise ValueError("syslog_headers_present Field is missing in configuration.")
+    if data.get('syslog_headers_present') is None:
+        raise ValueError(
+            "syslog_headers_present Field is missing in configuration.")
 
-    if data['syslog_headers_present'] and not data['syslog_headers_fields']:
-        raise ValueError("syslog_headers_fields should be not empty if syslog_headers_present field is set to True/1")
+    if (data.get('syslog_headers_present')) and (data.get('syslog_headers_fields') is None):
+        raise ValueError(
+            "syslog_headers_fields should be not empty if syslog_headers_present field is set to True/1")
 
-    if not data['leef_headers_fields']:
-        raise ValueError("leef_headers_fields Field is missing in configuration.")
+    if data.get('leef_headers_fields') is None:
+        raise ValueError(
+            "leef_headers_fields Field is missing in configuration.")
 
-    if not data['delimiter']:
+    if data.get('delimiter') is None:
         raise ValueError("delimiter Field is missing in configuration.")
 
-    if not data['payload_delimiter']:
-        raise ValueError("payload_delimiter Field is missing in configuration.")
+    if data.get('payload_delimiter') is None:
+        raise ValueError(
+            "payload_delimiter Field is missing in configuration.")
     return data
+
 
 def get_config(config_path: str) -> Dict[str, Any]:
     """Read the configurations from the yaml file.

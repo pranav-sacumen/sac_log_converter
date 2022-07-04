@@ -1,8 +1,8 @@
 """Driver function for leef to json conversion."""
 from typing import Any, Dict, List
 
-from converter import convert_leef_to_json
-from get_config import check_config_leef_to_json, get_config
+from sac_log_converter.converter import convert_leef_to_json
+from sac_log_converter.get_config import check_config_leef_to_json, get_config
 
 
 def leef_to_json(events_list: list, is_config: bool = True, config_path: str = "", config_json: Dict[Any, Any] = {}) -> List[dict]:
