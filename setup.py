@@ -7,10 +7,11 @@ py_typed = ["py.typed"]
 setup(
     packages={
         f"{PACKAGE_NAME}": py_typed,
-        f"{PACKAGE_NAME}.converter": py_typed,
-        f"{PACKAGE_NAME}.LeefToJSON": py_typed,
-        f"{PACKAGE_NAME}.Getconfig": py_typed,
-        f"{PACKAGE_NAME}.utils": py_typed
+        f"{PACKAGE_NAME}.constants": py_typed,
+        # f"{PACKAGE_NAME}.": py_typed,
+        # f"{PACKAGE_NAME}.get_config.py": py_typed,
+        # f"{PACKAGE_NAME}.leef_to_json.oy": py_typed,
+        # f"{PACKAGE_NAME}.utils.py": py_typed
     },
     setup_requires=["pytest-runner"]
 )
