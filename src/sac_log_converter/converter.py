@@ -89,7 +89,7 @@ def parse_leef_headers(syslog_h_present: str, leef_header: str, data_list: List[
     if syslog_h_present:
         leef_header_dict[leef_header_list[0]] = data_list[0].split(" ")[0]
     # read the leef_header_field names and create a dictionary
-        for element, index in zip(leef_header_list, range(2, len(data_list))):
+        for element, index in zip(leef_header_list[1:], range(1, len(data_list))):
             leef_header_dict[element] = data_list[index]
     else:
         # read the leef_header_field names and create a dictionary
@@ -97,7 +97,6 @@ def parse_leef_headers(syslog_h_present: str, leef_header: str, data_list: List[
             leef_header_dict[element] = data_list[index]
 
     return leef_header_dict
-
 
 def parse_data(datalist: List[str]) -> Dict[str, Any]:
     """Map data and add it as a dictionary."""
